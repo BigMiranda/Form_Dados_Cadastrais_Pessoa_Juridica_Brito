@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dados cadastrais — CNPJ</title>
+<!-- ===== PRÉVIA DO LINK NO WHATSAPP (banner) =====
+     Ao hospedar no GitHub Pages, suba uma imagem (ex.: banner.png, ~1200x630)
+     e troque a URL abaixo pela URL completa dela. -->
+<meta property="og:title" content="Dados cadastrais — CNPJ">
+<meta property="og:description" content="Preencha os dados da empresa para o cadastro. Leva cerca de 1 minuto.">
+<meta property="og:image" content="https://SEU-USUARIO.github.io/SEU-REPO/banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --cor-principal: #E30613;
+    --cor-escura: #B30410;
+    --cor-fundo: #f4f4f5;
+    --cor-texto: #18181b;
+    --cor-erro: #dc2626;
+    --cor-ok: #16a34a;
+    --cor-wpp: #25d366;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         background: var(--cor-fundo); color: var(--cor-texto); }
+  header { background: var(--cor-principal); color: #fff; padding: 22px 20px; text-align: center; }
+  header .titulo { font-size: 1.3rem; font-weight: 800; letter-spacing:.02em; }
+  header .nome { font-size: 1rem; font-weight: 700; margin-top: 8px; }
+  main { max-width: 540px; margin: -10px auto 32px; padding: 0 16px; }
+  .intro { background:#fff; border-radius:14px 14px 0 0; padding:16px 18px 0; font-size:.95rem; color:#3f3f46; }
+  form { background: #fff; border-radius: 0 0 14px 14px; padding: 8px 18px 22px; box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+  .secao { font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--cor-principal);
+           font-weight:700; margin:18px 0 6px; border-top:1px solid #eee; padding-top:14px; }
+  .secao:first-of-type { border-top:0; }
+  .campo { margin-bottom: 14px; }
+  label { display: block; font-weight: 600; margin-bottom: 6px; font-size: .92rem; }
+  label .obr { color: var(--cor-erro); }
+  input, select, textarea { width: 100%; padding: 13px 12px; font-size: 16px; border: 1.5px solid #d4d4d8;
+         border-radius: 10px; background: #fff; color: inherit; font-family: inherit; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--cor-principal); }
+  .invalido input, .invalido select, .invalido textarea { border-color: var(--cor-erro); background:#fef2f2; }
+  .msg-erro { display: none; color: var(--cor-erro); font-size: .83rem; margin-top: 4px; }
+  .invalido .msg-erro { display: block; }
+  .linha { display: flex; gap: 10px; }
+  .linha .campo { flex: 1; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size:.9rem; }
+  .check input { width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; }
+  button { width: 100%; padding: 15px; font-size: 1.05rem; font-weight: 700; border: 0; border-radius: 10px;
+           background: var(--cor-principal); color: #fff; cursor: pointer; margin-top:6px; }
+  button:active { transform: scale(.98); }
+  #resultado { display:none; background:#fff; border-radius:14px; padding:20px 18px;
+               box-shadow:0 4px 16px rgba(0,0,0,.08); margin-top:14px; text-align:center; }
+  #resultado.show { display:block; }
+  #resultado h2 { font-size:1.1rem; margin:0 0 4px; }
+  #resultado p.sub { font-size:.92rem; color:#3f3f46; margin:0 0 16px; }
+  .btn-wpp { display:flex; align-items:center; justify-content:center; gap:10px; background:var(--cor-wpp);
+             color:#fff; text-decoration:none; padding:17px; border-radius:12px; font-weight:800; font-size:1.15rem; }
+  .btn-wpp:active { transform: scale(.98); }
+  .backup { margin-top:16px; font-size:.85rem; }
+  .backup a { color:#52525b; text-decoration:underline; cursor:pointer; }
+  .box-texto { white-space:pre-wrap; text-align:left; background:#f4f4f5; border:1px solid #e4e4e7;
+               border-radius:10px; padding:14px; font-size:.9rem; margin:12px 0 0; display:none; }
+  .box-texto.show { display:block; }
+  .rodape { text-align: center; font-size: .78rem; color: #71717a; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="titulo">Dados cadastrais — CNPJ</div>
+  <div class="nome">Produtos: Internet | Box Streaming | Móvel</div>
+</header>
+
+<main>
+<div class="intro">Segue os dados para cadastro da oferta em CNPJ.</div>
+<form id="form" novalidate>
+
+  <div class="secao">Dados da empresa</div>
+
+  <div class="campo">
+    <label for="razao">Razão Social <span class="obr">*</span></label>
+    <input id="razao" placeholder="Nome da empresa conforme o CNPJ">
+    <div class="msg-erro">Informe a Razão Social.</div>
+  </div>
+
+  <div class="campo">
+    <label for="cnpj">CNPJ <span class="obr">*</span></label>
+    <input id="cnpj" inputmode="numeric" placeholder="00.000.000/0000-00" data-mascara="00.000.000/0000-00">
+    <div class="msg-erro">CNPJ inválido.</div>
+  </div>
+
+  <div class="campo">
+    <label for="abertura">Data de abertura <span class="obr">*</span></label>
+    <input id="abertura" inputmode="numeric" placeholder="DD/MM/AAAA" data-mascara="00/00/0000">
+    <div class="msg-erro">Data inválida.</div>
+  </div>
+
+  <div class="secao">Assinante</div>
+
+  <div class="campo">
+    <label for="assinante">Nome do assinante <span class="obr">*</span></label>
+    <input id="assinante" autocomplete="name" placeholder="Nome completo do responsável">
+    <div class="msg-erro">Informe nome e sobrenome.</div>
+  </div>
+
+  <div class="campo">
+    <label for="cpf">CPF do assinante <span class="obr">*</span></label>
+    <input id="cpf" inputmode="numeric" placeholder="000.000.000-00" data-mascara="000.000.000-00">
+    <div class="msg-erro">CPF inválido.</div>
+  </div>
+
+  <div class="secao">Contato</div>
+
+  <div class="linha">
+    <div class="campo">
+      <label for="tel1">Telefone 1 <span class="obr">*</span></label>
+      <input id="tel1" inputmode="tel" placeholder="(00) 00000-0000" data-mascara="(00) 00000-0000">
+      <div class="msg-erro">Telefone inválido.</div>
+    </div>
+    <div class="campo">
+      <label for="tel2">Telefone 2</label>
+      <input id="tel2" inputmode="tel" placeholder="(00) 00000-0000" data-mascara="(00) 00000-0000">
+      <div class="msg-erro">Telefone inválido.</div>
+    </div>
+  </div>
+
+  <div class="campo">
+    <label for="email">E-mail (contrato e fatura) <span class="obr">*</span></label>
+    <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="empresa@email.com">
+    <div class="msg-erro">E-mail inválido.</div>
+  </div>
+
+  <div class="secao">Endereço</div>
+
+  <div class="campo">
+    <label for="endereco">Endereço completo <span class="obr">*</span></label>
+    <input id="endereco" placeholder="Rua, número, bairro, cidade">
+    <div class="msg-erro">Informe o endereço completo.</div>
+  </div>
+
+  <div class="linha">
+    <div class="campo" style="flex:.7">
+      <label for="apto">APTO / Sala</label>
+      <input id="apto" placeholder="Opcional">
+    </div>
+    <div class="campo">
+      <label for="cep">CEP <span class="obr">*</span></label>
+      <input id="cep" inputmode="numeric" placeholder="00000-000" data-mascara="00000-000">
+      <div class="msg-erro">CEP inválido.</div>
+    </div>
+  </div>
+
+  <div class="secao">Plano</div>
+
+  <div class="campo">
+    <label for="vencimento">Vencimento <span class="obr">*</span></label>
+    <select id="vencimento">
+      <option value="">Selecione o dia…</option>
+      <option>Dia 5</option>
+      <option>Dia 10</option>
+      <option>Dia 15</option>
+      <option>Dia 20</option>
+      <option>Dia 25</option>
+    </select>
+    <div class="msg-erro">Escolha o dia de vencimento.</div>
+  </div>
+
+  <div class="campo">
+    <label for="pacote">Pacote escolhido <span class="obr">*</span></label>
+    <input id="pacote" placeholder="Ex.: nome do plano / oferta">
+    <div class="msg-erro">Informe o pacote escolhido.</div>
+  </div>
+
+  <div class="campo" style="margin-top:16px">
+    <label class="check"><input type="checkbox" id="lgpd">
+      <span>Autorizo o uso dos dados informados apenas para este cadastro e contratação, conforme a LGPD. <span class="obr">*</span></span></label>
+    <div class="msg-erro">É preciso autorizar para continuar.</div>
+  </div>
+
+  <button type="submit">Continuar</button>
+</form>
+
+<div id="resultado">
+  <h2>Tudo certo! ✅</h2>
+  <p class="sub">Toque no botão abaixo. O WhatsApp vai abrir com a mensagem pronta — é só tocar em <b>enviar</b>.</p>
+  <a id="btnWpp" class="btn-wpp" href="#">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"/></svg>
+    Enviar pelo WhatsApp
+  </a>
+  <div class="backup">
+    Não abriu o WhatsApp? <a id="linkCopiar">Copiar o texto</a> e colar na conversa do consultor.
+  </div>
+  <div class="box-texto" id="boxTexto"></div>
+  <p class="rodape">Os dados ficam só no seu celular até você enviar a mensagem.</p>
+</div>
+</main>
+
+<script>
+/* ===== CONFIGURAÇÃO ===== */
+const NUMERO_CONSULTOR = "5511992908676"; // WhatsApp do consultor: 55 + DDD + número, só dígitos
+/* ======================== */
+
+function aplicarMascara(valor, mascara) {
+  const d = valor.replace(/\D/g, "");
+  let out = "", i = 0;
+  for (const c of mascara) { if (i >= d.length) break; out += c === "0" ? d[i++] : c; }
+  return out;
+}
+document.querySelectorAll("[data-mascara]").forEach(el => {
+  el.maxLength = el.dataset.mascara.length;
+  el.addEventListener("input", () => { el.value = aplicarMascara(el.value, el.dataset.mascara); limparErro(el); });
+});
+document.querySelectorAll("#form input, #form select").forEach(el =>
+  el.addEventListener(el.type === "checkbox" || el.tagName === "SELECT" ? "change" : "input", () => limparErro(el)));
+
+const so = v => v.replace(/\D/g, "");
+
+function cpfValido(v) {
+  const c = so(v);
+  if (c.length !== 11 || /^(\d)\1+$/.test(c)) return false;
+  for (let t = 9; t < 11; t++) {
+    let s = 0; for (let i = 0; i < t; i++) s += +c[i] * (t + 1 - i);
+    if (((s * 10) % 11) % 10 !== +c[t]) return false;
+  }
+  return true;
+}
+function cnpjValido(v) {
+  const c = so(v);
+  if (c.length !== 14 || /^(\d)\1+$/.test(c)) return false;
+  const calc = base => {
+    const len = base.length;
+    let pos = len - 7, sum = 0;
+    for (let i = 0; i < len; i++) { sum += +base[i] * pos--; if (pos < 2) pos = 9; }
+    const r = sum % 11;
+    return r < 2 ? 0 : 11 - r;
+  };
+  if (calc(c.substring(0, 12)) !== +c[12]) return false;
+  if (calc(c.substring(0, 13)) !== +c[13]) return false;
+  return true;
+}
+function dataValida(v) {
+  const m = v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if (!m) return false;
+  const d = +m[1], mo = +m[2], a = +m[3], dt = new Date(a, mo - 1, d);
+  return dt.getDate() === d && dt.getMonth() === mo - 1 && a > 1900 && dt <= new Date();
+}
+
+const regras = {
+  razao:      v => v.trim().length >= 2,
+  cnpj:       cnpjValido,
+  abertura:   dataValida,
+  assinante:  v => v.trim().split(/\s+/).length >= 2,
+  cpf:        cpfValido,
+  tel1:       v => so(v).length === 11,
+  tel2:       v => v.trim() === "" || so(v).length === 11,
+  email:      v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+  endereco:   v => v.trim().length >= 5,
+  cep:        v => so(v).length === 8,
+  vencimento: v => v !== "",
+  pacote:     v => v.trim().length >= 2,
+};
+
+function marcarErro(el, erro) { el.closest(".campo").classList.toggle("invalido", erro); }
+function limparErro(el) { marcarErro(el, false); }
+
+document.getElementById("cep").addEventListener("input", async e => {
+  const c = so(e.target.value);
+  if (c.length !== 8) return;
+  try {
+    const r = await fetch(`https://viacep.com.br/ws/${c}/json/`);
+    const j = await r.json();
+    if (!j.erro) {
+      document.getElementById("endereco").value =
+        `${j.logradouro}${j.bairro ? ", " + j.bairro : ""} - ${j.localidade}/${j.uf}`;
+    }
+  } catch (_) {}
+});
+
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+  let primeiro = null;
+  for (const [id, regra] of Object.entries(regras)) {
+    const el = document.getElementById(id);
+    const ok = regra(el.value);
+    marcarErro(el, !ok);
+    if (!ok && !primeiro) primeiro = el;
+  }
+  const lgpd = document.getElementById("lgpd");
+  marcarErro(lgpd, !lgpd.checked);
+  if (!lgpd.checked && !primeiro) primeiro = lgpd;
+  if (primeiro) { primeiro.focus(); primeiro.scrollIntoView({ behavior:"smooth", block:"center" }); return; }
+
+  const v = id => document.getElementById(id).value.trim();
+  const texto =
+`*DADOS CADASTRAIS — CNPJ*
+
+Razão Social: ${v("razao")}
+CNPJ: ${v("cnpj")}
+Data de abertura: ${v("abertura")}
+
+Nome do assinante: ${v("assinante")}
+CPF: ${v("cpf")}
+
+Telefone 1: ${v("tel1")}
+Telefone 2: ${v("tel2") || "-"}
+E-mail: ${v("email")}
+
+Endereço: ${v("endereco")}
+APTO/Sala: ${v("apto") || "-"}
+CEP: ${v("cep")}
+
+Vencimento: ${v("vencimento")}
+Pacote escolhido: ${v("pacote")}`;
+
+  document.getElementById("btnWpp").href =
+    `https://wa.me/${NUMERO_CONSULTOR}?text=${encodeURIComponent(texto)}`;
+  document.getElementById("boxTexto").textContent = texto;
+
+  document.getElementById("form").style.display = "none";
+  document.querySelector(".intro").style.display = "none";
+  const res = document.getElementById("resultado");
+  res.classList.add("show");
+  window.scrollTo({ top:0, behavior:"smooth" });
+
+  document.getElementById("linkCopiar").onclick = async () => {
+    try { await navigator.clipboard.writeText(texto); }
+    catch (_) {
+      const t = document.createElement("textarea");
+      t.value = texto; document.body.appendChild(t); t.select();
+      document.execCommand("copy"); t.remove();
+    }
+    document.getElementById("boxTexto").classList.add("show");
+    document.getElementById("linkCopiar").textContent = "✓ Copiado — cole na conversa";
+  };
+});
+</script>
+</body>
+</html>
